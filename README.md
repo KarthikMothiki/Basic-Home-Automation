@@ -6,7 +6,7 @@ How cool is it to make your tasks simple? This is a basic DIY Project that I mad
 1. Arduino Uno
 2. 4 - Module Relay (5V)
 3. AC Power Source
-4. Resistors
+4. Resistors (required)
 5. Bread Board
 6. Jumper Wires
 7. Blynk App
