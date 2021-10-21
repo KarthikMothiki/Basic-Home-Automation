@@ -1,17 +1,3 @@
-/**********************************************************************************
- *  TITLE: Blynk + Manual Switch control Relays using Multiple NodeMCU (Real time feedback + no WiFi control)
- *  Click on the following links to learn more. 
- *  YouTube Video: https://youtu.be/v4MealVM5bE
- *  Related Blog : https://iotcircuithub.com/esp8266-projects/
- *  by Tech StudyCell
- *  Preferences--> Aditional boards Manager URLs : 
- *  https://dl.espressif.com/dl/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json
- *  
- *  Download Board ESP8266 NodeMCU : https://github.com/esp8266/Arduino
- *  Download the libraries
- *  https://github.com/blynkkk/blynk-library/releases/download/v0.6.1/Blynk_Release_v0.6.1.zip
- **********************************************************************************/
-
 //#define BLYNK_PRINT Serial            
 #include <BlynkSimpleEsp8266.h>
 
@@ -36,7 +22,6 @@
 #define VPIN_BUTTON_2    V2
 #define VPIN_BUTTON_3    V3 
 #define VPIN_BUTTON_4    V4
-#define VPIN_BUTTON_5    V5
 
 int toggleState_1 = 1; //Define integer to remember the toggle state for relay 1
 int toggleState_2 = 1; //Define integer to remember the toggle state for relay 2
@@ -102,18 +87,6 @@ void relayOnOff(int relay){
               digitalWrite(RelayPin4, HIGH); // turn off relay 4
               toggleState_4 = 1;
               Serial.println("Device4 OFF");
-             }
-             delay(100);
-      case 5: 
-             if(toggleState_5 == 1){
-              digitalWrite(RelayPin5, LOW); // turn on relay 4
-              toggleState_5 = 0;
-              Serial.println("Device5 ON");
-             }
-             else{
-              digitalWrite(RelayPin5, HIGH); // turn off relay 4
-              toggleState_5 = 1;
-              Serial.println("Device5 OFF");
              }
              delay(100);
       break;
@@ -203,9 +176,9 @@ void checkBlynkStatus() { // called every 3 seconds by SimpleTimer
   if (isconnected == true) {
     wifiFlag = 0;
     Blynk.virtualWrite(VPIN_BUTTON_1, toggleState_1);
-    /*Blynk.virtualWrite(VPIN_BUTTON_2, toggleState_2);
+    Blynk.virtualWrite(VPIN_BUTTON_2, toggleState_2);
     Blynk.virtualWrite(VPIN_BUTTON_3, toggleState_3);
-    Blynk.virtualWrite(VPIN_BUTTON_4, toggleState_4);*/
+    Blynk.virtualWrite(VPIN_BUTTON_4, toggleState_4);
   }
 }
 void setup()
@@ -247,12 +220,12 @@ void loop()
 {  
   if (WiFi.status() != WL_CONNECTED)
   {
-    //Serial.println("WiFi Not Connected");
+    Serial.println("WiFi Not Connected");
     digitalWrite(wifiLed, HIGH);
   }
   else
   {
-    //+Serial.println("WiFi Connected");
+    Serial.println("WiFi Connected");
     digitalWrite(wifiLed, LOW); //Turn on WiFi LED
     Blynk.run();
   }
